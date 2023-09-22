@@ -10,8 +10,11 @@ function getComputerChoice () {
 }
 
 
+
 function playRound(playerSelection , computerSelection) {
-    playerSelection.toLowerCase()
+    
+    console.log(playerSelection);
+    console.log(computerSelection);
     if (playerSelection === computerSelection) {
         return "Tie!";
     } else if (playerSelection == 'rock' && computerSelection == 'paper' || playerSelection == 'scissors' && computerSelection == 'Rock' || playerSelection == 'Paper' && computerSelection == 'Scissors') {
@@ -26,7 +29,7 @@ function game(){
     let lose = 0;
     let ties = 0;
 
-    while (wins <= 3 || lose <= 3) {
+    for (let i = 1 ; i < 6 ; i++) {
         if (playRound(playerSelection,computerSelection) === "You win!") {
             wins++
         } else if (playRound(playerSelection,computerSelection) === "You lost!") {
@@ -35,9 +38,13 @@ function game(){
             ties++
         }
     }
-    return 
+    if (wins > lose) {
+        return "You win!";
+    } else if (wins < lose) {
+        return "You lost";
+    }
 }
+let playerSelection = "paper";
+let computerSelection = getComputerChoice();
+game();
 
-const playerSelection = "Paper";
-const computerSelection = getComputerChoice();
-console.log(playRound(playerSelection , computerSelection))
