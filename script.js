@@ -13,7 +13,6 @@ function getComputerChoice () {
 
 function playRound(playerSelection , computerSelection) {
 
-    let computerSelection = getComputerChoice();
 
     if ((playerSelection == "paper" && computerSelection == "rock") || (playerSelection == "rock" && computerSelection == "scissors") || (playerSelection == "scissors" && computerSelection == "paper")){
         return 3; //wins
@@ -27,34 +26,38 @@ function playRound(playerSelection , computerSelection) {
 
 function game(){
     let wins = 0;
-    let lose = 0;
+    let lost = 0;
     let ties = 0;
+   
+    for (i = 0; i < 5 ; i++){
+        let playerSelection = prompt("Choose your move: ");
+        let computerSelection = getComputerChoice();
 
-    for (i = 0 ; i < 5 ; i++){
+        let playerSelectionLower = playerSelection.toLowerCase()
 
-        
-    
-        let playerSelection = prompt("Choose your move: ")
-
-        if (playRound(playerSelection,computerSelection) === 2) {
+        if (playRound(playerSelectionLower, computerSelection) == 1) {
+            lost++
+        } else if (playRound(playerSelectionLower, computerSelection) == 2){
             ties++
-        } else if (playRound(playerSelection,computerSelection) === 1) {
-            lose++
-        } else if (playRound(playerSelection,computerSelection) === 3) {
+        } else if (playRound(playerSelectionLower, computerSelection) == 3) {
             wins++
         }
+        console.log("player: ",playerSelectionLower);
+        console.log("computer : ",computerSelection);
     }
 
-    console.log(wins)
-    console.log(lose)
-    console.log(ties)
-    /*
-    if (wins > lose) {
-        return "You win!";
-    } else if (wins < lose) {
-        return "You lost";
+    console.log("wins: " , wins);
+    console.log("lost: " ,lost);
+    console.log("ties: " ,ties);
+    
+    if (wins < lost) {
+        console.log( "I won!");
+    } else if (wins > lost) {
+        console.log( "You Won!");
+    } else if (wins == ties) {
+        console.log( "We tied. We play again?");
     }
-    */
+
 }
 
 
