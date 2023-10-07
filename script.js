@@ -1,7 +1,12 @@
 const buttons = document.querySelectorAll("button");
+const results = document.querySelector(".results");
+const roundResult = document.querySelector(".round-result");
+const roundCounter = document.querySelector(".round-counter");
+const winner = document.querySelector(".winner");
 
 let playerCount = 0;
 let computerCount = 0;
+let tiedRounds = 0;
 
 
 
@@ -28,22 +33,36 @@ function getComputerChoice () {
 
 function playRound(playerSelection , computerSelection) {
 
-
     if ((playerSelection == "paper" && computerSelection == "rock") || (playerSelection == "rock" && computerSelection == "scissors") || (playerSelection == "scissors" && computerSelection == "paper")){
-        console.log('wins');
-        console.log(playerSelection);
-        console.log(computerSelection);
-        return 3; //wins
+        playerCount++;
+        roundResult.textContent = `${playerSelection} beats ${computerSelection}. You won the round!`;
+        roundCounter.textContent = `You wins:  ${playerCount}    Computer wins: ${computerCount} Tied rounds: ${tiedRounds}`;
+        results.appendChild(roundResult);
+        results.appendChild(roundCounter);
+        
+        
+        winnerGame(playerCount, computerCount);
+        return 3; //round won
+
     } else if ((playerSelection == "paper" && computerSelection == "paper") || (playerSelection == "rock" && computerSelection == "rock") || (playerSelection == "scissors" && computerSelection == "scissors")){
-        console.log('ties');
-        console.log(playerSelection);
-        console.log(computerSelection);
-        return 2; //ties
+        tiedRounds++;
+        roundResult.textContent = `${playerSelection} against ${computerSelection}. Tied round!`;
+        roundCounter.textContent = `You wins:  ${playerCount}    Computer wins: ${computerCount} Tied rounds: ${tiedRounds}`;
+        results.appendChild(roundResult);
+        results.appendChild(roundCounter);
+        
+        winnerGame(playerCount, computerCount);
+        return 2; //tied round
+
     } else {
-        console.log('lost');
-        console.log(playerSelection);
-        console.log(computerSelection);
-        return 1; //lost
+        computerCount++;
+        roundResult.textContent = `${computerSelection} beats ${playerSelection}. You lost the round!`;
+        roundCounter.textContent = `You wins:  ${playerCount}    Computer wins: ${computerCount} Tied rounds: ${tiedRounds}`;
+        results.appendChild(roundResult);
+        results.appendChild(roundCounter);
+        
+        winnerGame(playerCount, computerCount);
+        return 1; //round lost
     }
     
 }
@@ -87,8 +106,15 @@ function playRound(playerSelection , computerSelection) {
 
 game();
 */
-
-
+function winnerGame (player, computer) {
+    if (player === 5){
+        winner.textContent = "You win the game!";
+        results.appendChild(winner);
+    } else if (computer === 5){
+        winner.textContent = "You lose, Computer wins the game."
+        results.appendChild(winner);
+    }
+}
 
 
 
